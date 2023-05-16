@@ -1,0 +1,68 @@
+2. Дана квадратная матрица размером SIZE x SIZE в виде одномерного массива, создайте результирующий массив размером SIZE, в котором будут храниться суммы элементов по столбцу матрицы. Выведите результирующий массив на экран. 
+Например:
+Содержимое матрицы: 1 5 9 8 7 5 6 3 2 4 9 5 3 2 2 0 можно интерпретировать как: 
+1 5 9 8 – первая строка
+7 5 6 3 – вторая строка
+2 4 9 5 – третья строка
+3 2 2 0 – четвертая строка 
+Вывод: 13 16 26 16
+Т.е. result[0] – сумма элементов в первом столбце result[1] – сумма элементов во втором столбце и т.д
+
+
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
+
+void fill (int array[], int size);
+
+void show (int array[], int size);
+
+
+int main()
+{
+	setlocale(0, "");
+	srand(time(NULL));
+
+	const int size = 4;
+	int array[size * size];
+	int result[size] = {0};
+
+	cout << "\n\tДанное приложение посчитает сумму всех столбцов массива размером " << size << "*" << size << ".\n\n";
+
+	cout << "\tИсходный массив:";
+	fill(array, size * size);
+	show(array, size * size);
+
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = i; j < size*size; j += size)
+		{
+			result[i] += array[j];
+		}
+	}
+
+
+	cout << "\n\n\tМассив, содержащий суммы столбцов:";
+	show(result, size);
+
+
+	cout << "\n\n\n";
+	return 0;
+}
+
+
+
+void fill(int array[], int size)
+{
+	for (int i = 0; i < size; i++)
+		array[i] = rand() % 9 + 1;
+}
+
+
+void show(int array[], int size)
+{
+	cout << "\n\t";
+	for (int i = 0; i < size; i++)
+		cout << array[i] << " ";
+}
